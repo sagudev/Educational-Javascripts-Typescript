@@ -28,9 +28,9 @@
             </fieldset>
 
             <fieldset>
-                <b>Tick</b><br/>
-                <input type="range" id="rngTick" name="tick" value="30" min="1" max="500" oninput="this.nextElementSibling.value = this.value; onTickChange(this.value);">
-                <output>30</output>ms
+                <b>Time step</b><br/>
+                <input type="range" id="rngTimestep" name="timestep" value="8640" min="1" max="100000" oninput="this.nextElementSibling.value = this.value; onTimeStepChange(this.value);" style="width: 100%;">
+                <output>8640</output>ms in one tick (30 ms)
             </fieldset>
 
             <fieldset> 
@@ -213,8 +213,8 @@
         updateControls()
     }
 
-    function onTickChange(value) {
-        tidalModel.changeTick(value);
+    function onTimeStepChange(value) {
+        tidalModel.changeTimeStep(parseInt(value));
     }
 </script>
 </body>

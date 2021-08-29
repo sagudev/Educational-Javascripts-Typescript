@@ -151,13 +151,12 @@ export class TidalSimulation {
         this.bckgImage.src = this.config.path + "/images/milkyway.jpg";
         this.init(cfg);
     }
-    changeTick(tick) {
-        clearInterval(this.ticker);
-        this.ticker = window.setInterval(this.tick.bind(this), tick);
+    changeTimeStep(ts) {
+        this.ts = ts;
     }
     init(config) {
         if (config.isRunning) {
-            this.ticker = window.setInterval(this.tick.bind(this), 30);
+            window.setInterval(this.tick.bind(this), 30);
         }
         else {
             this.tick();
