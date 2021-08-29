@@ -4,8 +4,8 @@
   "description": "",
   "main": "./src/tides.ts",
   "scripts": {
-    "build": "webpack --mode development",
-    "prod": "webpack --mode production"
+    "build": "tsc && webpack --mode development",
+    "prod": "tsc && webpack --mode production"
   },
   "keywords": [
     "tides",

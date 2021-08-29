@@ -43,6 +43,7 @@ export class TidalSimulation {
         private lookAt : Vec2d;
         private numArrows : number;
         private time : number;
+        private ticker: number | undefined;
         private gamma : number;
         private distMoonEarth : number;
         private distEarthSun : number;
@@ -194,10 +195,15 @@ export class TidalSimulation {
                 this.init(cfg);
         }
 
+        public changeTick(tick : number) : void {
+                clearInterval(this.ticker);
+                this.ticker = window.setInterval(this.tick.bind(this), tick);
+        }
+
         public init(config : any) : void {
 
                 if (config.isRunning) {
-                        window.setInterval(this.tick.bind(this), 30)
+                        this.ticker = window.setInterval(this.tick.bind(this), 30)
                 } else {
                         this.tick();
                 }

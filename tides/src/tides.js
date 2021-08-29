@@ -27,11 +27,11 @@
 //              - Added capabilitie to display static states (for neap tide and spring tide visualization)
 //      Version 2.0 (2016-09-27):
 //              - Code converted to TypeScript
-//
+//      Version 2.1 (2021-01-16):
+//              - turned into a package with webpack
 //-------------------------------------------------------------------------------------------------
 import { Vec2d } from '../../shared/vec2d';
 import { Context2d } from '../../shared/context2d';
-
 export class TidalSimulation {
     constructor(cfg) {
         this.distCenterOfMass = 0;
@@ -91,7 +91,7 @@ export class TidalSimulation {
             this.canvas.addEventListener('mousedown', this.onMouseDown.bind(this), false);
             this.canvas.addEventListener('mouseup', this.onMouseUp.bind(this), false);
             this.canvas.addEventListener('mousemove', this.onMouseMove.bind(this), false);
-            this.canvas.world = this;
+            //                        this.canvas.world = this
         }
         else if (cfg.setup == 1) {
             this.setScaleForceToModel(cfg.scaleForceToModel);
@@ -151,9 +151,13 @@ export class TidalSimulation {
         this.bckgImage.src = this.config.path + "/images/milkyway.jpg";
         this.init(cfg);
     }
+    changeTick(tick) {
+        clearInterval(this.ticker);
+        this.ticker = window.setInterval(this.tick.bind(this), tick);
+    }
     init(config) {
         if (config.isRunning) {
-            window.setInterval(this.tick.bind(this), 30);
+            this.ticker = window.setInterval(this.tick.bind(this), 30);
         }
         else {
             this.tick();
